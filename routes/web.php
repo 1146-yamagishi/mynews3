@@ -22,8 +22,8 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('XXX/AAA/BBB','XXX\AAAController@BBB');
     
 Route::group(['prefix' => 'admin'], function() {
-    Route::get('profile/create', 'Admin\PlofileController@add');
-    Route::get('profile/edit', 'Admin\PlofileController@edit');
+    Route::get('profile/create', 'Admin\PlofileController@add')->middleware('auth');
+    Route::get('profile/edit', 'Admin\PlofileController@edit')->middleware('auth');
 });
 
 Route::group(['prefix' => 'admin'], function (){

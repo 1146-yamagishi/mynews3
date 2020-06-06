@@ -13,7 +13,7 @@
 
 
         {{-- admin.blade.phpの@yield('title')に'ニュースの新規作成'を埋め込む --}}
-        @section('title', 'ニュースの新規作成')
+        @section('title', 'MYプロフィール')
 
 
 
