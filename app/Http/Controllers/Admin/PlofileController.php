@@ -12,18 +12,33 @@ class PlofileController extends Controller
     {
         return view('admin.profile.create');
     }
-
-    public function create()
+    public function create(Request $request)
+    {
+      // admin/news/createにリダイレクトする
+      return redirect('admin/profile/create');
+    }
+    
+    
+    
+    public function create1()
     {
         return redirect('admin/profile/create');
     }
+
 
     public function edit()
     {
         return view('admin.profile.edit');
     }
+    public function update(Request $request)
+    {
+      // admin/news/createにリダイレクトする
+      return redirect('admin/profile/edit');
+    }
 
-    public function update()
+
+
+    public function update1()
     {
         return redirect('admin/profile/edit');
     }
