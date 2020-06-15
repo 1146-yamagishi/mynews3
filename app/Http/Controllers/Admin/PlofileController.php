@@ -17,45 +17,55 @@ class PlofileController extends Controller
     public function create(Request $request)
     {
     $this->validate($request, Profile::$rules);
-    $profile = new Profile;
+    $profiles = new Profile;
     $form = $request->all();
       
       
     // フォームから送信されてきた_tokenを削除する
     unset($form['_token']);
-      // フォームから送信されてきたimageを削除する
     unset($form['image']);
-      
       // データベースに保存する
-    $profile->fill($form);
-    $profile->save();
+    $profiles->fill($form);
+    $profiles->save();
      
       // admin/news/createにリダイレクトする
       return redirect('admin/profile/create');
     }
     
+    public function index(Request $request){
+      $cond_name=$request->cond_name;
+      if($cond_name != ''){
+        $posts=Profile::where('name',$cond_name)->get();
+        }else{
+          $posts=Profile::all();
+      }
+      return view('admin/profile/index',['posts'=>$posts,'cond_name'=>$cond_name]);
+    }
     
-    
-    public function create1()
-    {
-        return redirect('admin/profile/create');
-    }
+    public function edit(Request $request)
+  {
+      // News Modelからデータを取得する
+      $profiles = Profile::find($request->id);
+      if (empty($profiles)) {
+        abort(404);    
+      }
+      return view('admin.profile.edit', ['profiles_form' => $profiles]);
+  }
 
 
-    public function edit()
-    {
-        return view('admin.profile.edit');
-    }
-    public function update(Request $request)
-    {
-      // admin/news/createにリダイレクトする
-      return redirect('admin/profile/edit');
-    }
+  public function update(Request $request)
+  {
+      // Validationをかける
+      $this->validate($request, Profile::$rules);
+      // News Modelからデータを取得する
+      $profiles = Profile::find($request->id);
+      // 送信されてきたフォームデータを格納する
+      $profiles_form = $request->all();
+      unset($profiles_form['_token']);
 
+      // 該当するデータを上書きして保存する
+      $profiles->fill($profiles_form)->save();
 
-
-    public function update1()
-    {
-        return redirect('admin/profile/edit');
-    }
+      return redirect('admin/profile');
+  }
 }
