@@ -22,7 +22,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('news/edit', 'Admin\NewsController@edit')->middleware('auth'); // 追記
     Route::post('news/edit', 'Admin\NewsController@update')->middleware('auth'); // 追記
     Route::get('news/delete', 'Admin\NewsController@delete')->middleware('auth');
-    
+    Route::get('/','NewsController@index');
 });
 
     Route::get('XXX/AAA/BBB','XXX\AAAController@BBB');
@@ -35,6 +35,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('profile', 'Admin\PlofileController@index')->middleware('auth');
     Route::get('profile/edit', 'Admin\PlofileController@edit')->middleware('auth'); // 追記
     Route::post('plofile/edit', 'Admin\PlofileController@update')->middleware('auth'); // 追記
+    Route::get('profile/a','PlofileController@index');
 });
 
 Route::group(['prefix' => 'admin'], function (){
